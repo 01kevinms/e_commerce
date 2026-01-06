@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GetOrder, getProfile } from "../../services/apis/Get.routes";
+import { GetOrder } from "../../services/apis/Get.routes";
 import { OrderCard } from "../../components/cards/OrderCard";
 import { ConfirmDelivered } from "../../services/apis/Post.routes";
 import { DeleteOrder } from "../../services/apis/Delete.routes";
@@ -10,7 +10,7 @@ import { Toast } from "../../components/theme/Toast";
 
 
 function ListOrders() {
- const [user, setUser] = useState<any>(null);
+//  const [user, setUser] = useState<any>(null);
    const [orders, setOrders] = useState<any[]>([]);
    const [modal, setModal] = useState<any>(null);
    const [toast, setToast] = useState<any>(null);
@@ -20,7 +20,7 @@ function ListOrders() {
      product: any;
    } | null>(null);
    useEffect(() => {
-     getProfile().then(setUser);
+    
      loadOrders();
    }, []);
   

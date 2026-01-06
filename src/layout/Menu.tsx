@@ -1,5 +1,5 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { Heart, Home, Search, Settings, ShoppingCart, Store, User } from "lucide-react";
+import { Heart, Home, Settings, ShoppingCart, Store, User } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { Cart } from "../types/cards";
 import { getCart, getProfile } from "../services/apis/Get.routes";

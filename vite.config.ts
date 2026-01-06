@@ -8,4 +8,8 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  base:'/e_commerce/',
+  build:{
+    outDir:'docs'
+  }
 })

@@ -17,9 +17,9 @@ export default function Checkout() {
   const [step, setStep] = useState(1);
   const [user, setUser] = useState<any>();
 
-  const [items, setItems] = useState(location.state?.items || []);
   const [addressId, setAddressId] = useState<string>();
   const [paymentMethod, setPaymentMethod] = useState<MethodPayment>();
+  const items = location.state?.items || [];
 
   useEffect(() => {
     getProfile().then(setUser);

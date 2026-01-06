@@ -28,6 +28,7 @@ export default function CreateProduct({onclose}:any){
     function fileSelect(e: React.ChangeEvent<HTMLInputElement>){
         const file = e.target.files?.[0] ?? null
         if(file){
+          setSelected(file)
             setForm(prev=>({
                 ...form,
                 images:[...prev.images,file]
@@ -188,6 +189,11 @@ export default function CreateProduct({onclose}:any){
           className="hidden"
         />
       </label>
+     {selected && (
+        <p className="text-sm text-gray-500">
+          Arquivo selecionado: {selected.name}
+        </p>
+      )}
 
       {previewUrl && (
         <img

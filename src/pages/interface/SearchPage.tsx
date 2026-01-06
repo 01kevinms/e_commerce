@@ -9,7 +9,7 @@ export function SearchPage() {
 
   const [products, setProducts] = useState<any[]>([]);  
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
 
   useEffect(() => {
     async function load() {

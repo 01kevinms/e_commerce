@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { HashRouter, Route, Routes } from "react-router-dom"
 import Dashboard from "./pages/interface/Dashboard"
 import ItemSelect from "./pages/interface/Product"
 import Login from "./pages/interface/Login"
@@ -20,9 +20,9 @@ import CreateStore from "./components/store/CreateStore"
 
 
 function App() {
-
+  
   return (
-     <BrowserRouter>
+     <HashRouter>
     <Routes>
        {/* PÚBLICAS */}
         <Route path="/signin" element={<Login />} />
@@ -48,7 +48,7 @@ function App() {
         </Route>
 
       </Routes>
-  </BrowserRouter>     
+  </HashRouter>     
   )
 }
 

@@ -1,8 +1,11 @@
 # 🛒 E-commerce Platform (Full Stack)
 
 Plataforma completa de **e-commerce multi-loja**, desenvolvida com foco em performance, escalabilidade e boas práticas.  
-O sistema permite que usuários criem lojas, cadastrem produtos com imagens, gerenciem pedidos e acompanhem métricas em um dashboard administrativo.
+O sistema permite que usuários criem lojas, cadastrem produtos com imagens, gerenciem pedidos e acompanhem métricas em um dashboard administrativo. 
 
+acesse aos arquivos aq
+👉 Acesse aqui:
+https://github.com/01kevinms/e_commerce/tree/master
 ---
 
 ## 🚀 Funcionalidades

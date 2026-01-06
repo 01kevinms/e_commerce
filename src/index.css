@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@import 'tippy.js/dist/tippy.css';
+@import "swiper/css";
+@import "swiper/css/navigation";
+
+@tailwind utilities;
+@custom-variant dark (&:where(.dark, .dark *));
+body {
+  @apply font-sans;
+}
+.mySwiper .swiper-button-next,
+.mySwiper .swiper-button-prev {
+  top: 50% !important;
+  transform: translateY(-50%);
+  color: white;
+  z-index: 30;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+
+/* Estilo bonito */
+.mySwiper .swiper-button-next,
+.mySwiper .swiper-button-prev {
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.mySwiper .swiper-button-next:hover,
+.mySwiper .swiper-button-prev:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+
+
+.poppins-thin {
+  font-family: "Poppins", sans-serif;  
+  font-style: normal;
+}
+.jersey-25-regular {
+  font-family: "Jersey 25", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.jersey-10-regular {
+  font-family: "Jersey 10", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+// <weight>: Use a value from 400 to 700
+// <uniquifier>: Use a unique and descriptive class name
+
+.pixelify-sans-normal {
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}

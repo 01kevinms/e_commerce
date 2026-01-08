@@ -2,20 +2,23 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchProducts } from "../../services/apis/Get.routes";
 import { ProductSearchCard } from "../../components/cards/CardSearch";
+import Loading from "../../components/shared/Loading";
+import { useLoading } from "../../components/shared/LoadingProvider";
 
 export function SearchPage() {
   const [params] = useSearchParams();
   const search = params.get("q") || "";
 
   const [products, setProducts] = useState<any[]>([]);  
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [page] = useState(1);
-
+  const{show,hide}=useLoading()
+  
   useEffect(() => {
     async function load() {
       if (!search) return;
 
-      setLoading(true);
+      show("Carregando produtos...");
 
       const res = await searchProducts({
         search,
@@ -24,7 +27,7 @@ export function SearchPage() {
       });
 
       setProducts(res.data);
-      setLoading(false);
+      hide();
     }
 
     load();
@@ -45,7 +48,7 @@ export function SearchPage() {
 
       {/* LOADING */}
       {loading && (
-        <p className="text-gray-400">Buscando produtos...</p>
+        <Loading/>
       )}
 
       {/* GRID */}

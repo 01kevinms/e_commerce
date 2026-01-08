@@ -11,20 +11,32 @@ import { ConfirmModal } from "../../components/theme/ConfirmModal";
 import { ReviewModal } from "../../components/modals/ReviewModal";
 import { OrderCard } from "../../components/cards/OrderCard";
 import type { Address } from "../../types/cards";
+import { useLoading } from "../../components/shared/LoadingProvider";
 
 function UserMain() {
   const [user, setUser] = useState<any>(null);
   const [orders, setOrders] = useState<any[]>([]);
   const [modal, setModal] = useState<any>(null);
   const [toast, setToast] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading,setLoading]= useState(false)
   const [reviewData, setReviewData] = useState<{
     orderId: string;
     product: any;
   } | null>(null);
+  
+const{show,hide}=useLoading()
+
   useEffect(() => {
-    getProfile().then(setUser);
+    async function LoadingUser() {
+      try {
+        show("Carregando informações...")
+        const res = await getProfile()
+        setUser(res)        
+      } catch (error) {        
+      }finally{hide()}
+    }
     loadOrders();
+    LoadingUser()
   }, []);
 
   const addressDefault:Address = user?.address.find((addr:Address)=> addr.isDefault)

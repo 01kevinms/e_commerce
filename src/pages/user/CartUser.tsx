@@ -7,16 +7,23 @@ import { CartItem } from "../../components/cart/CartUserItem";
 import { CartFooter } from "../../components/cart/CartFooter";
 import { useNavigate } from "react-router-dom";
 import { getCart } from "../../services/apis/Get.routes";
+import { useLoading } from "../../components/shared/LoadingProvider";
 
 export default function CartUser() {
 
   const [cart, setCart] = useState<Cart | null>(null);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const{show,hide}=useLoading()
   
   async function load() {
-    const data = await getCart();
-    setCart(data);}
-
+    try {
+      show("Carregando informações...")
+      const data = await getCart();
+      setCart(data)
+    } catch (error) {
+      console.error(error)
+    }finally{hide()}
+  }
   function toggleSelect(id: string) {
   setSelectedIds(prev =>
   prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id])
@@ -39,7 +46,7 @@ function handleCheckout(){
   })
 }
 
-  useEffect(() => {
+  useEffect(() => {    
     load();
   }, []);
 

@@ -1,26 +1,32 @@
 import { useEffect, useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
 import { searchProducts } from "../../services/apis/Get.routes";
+import { useLoading } from "../shared/LoadingProvider";
 
 export function ProductSearch() {
   const [search, setSearch] = useState("");
   const [products, setProducts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
-
+  const [loading] = useState(false);
   const debouncedSearch = useDebounce(search, 500);
-
+  const{show,hide}= useLoading()
   useEffect(() => {
     async function load() {
-      setLoading(true);
-
-      const res = await searchProducts({
-        search: debouncedSearch,
-        page: 1,
-        limit: 10,
-      });
-
-      setProducts(res.data);
-      setLoading(false);
+      try {
+        
+        
+        show("Pesquisando produto...")
+        
+        const res = await searchProducts({
+          search: debouncedSearch,
+          page: 1,
+          limit: 10,
+        });
+        
+        setProducts(res.data);
+      } catch (error) {
+      }finally{
+        hide();
+      }
     }
 
     load();
@@ -37,9 +43,6 @@ export function ProductSearch() {
       />
 
       {/* LOADING */}
-      {loading && (
-        <p className="text-sm text-gray-400">Buscando produtos...</p>
-      )}
 
       {/* RESULTADOS */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

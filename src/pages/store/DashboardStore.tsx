@@ -6,31 +6,38 @@ import { StatsCard } from "../../components/store/StatsCard"
 import { StoreHeader } from "../../components/store/StoreHeader"
 import { GethistoricalStore, getProfile } from "../../services/apis/Get.routes"
 import type { HistoricalStoreResponse, Product, Store } from "../../types/cards"
+import { useLoading } from "../../components/shared/LoadingProvider"
 
 function DashboardStore() {
   const [store, setStore] = useState<Store | null>(null);
-  const [loading, setLoading] = useState(true);
   const [historical,setHistorical]= useState<HistoricalStoreResponse | null>(null)  
 
   const products: Product[] = historical?.ProductsCreate ?? [];
+  const{show,hide}=useLoading()
 
   useEffect(() => {
-    getProfile()
-      .then((user) => {
+    async function LoadinaDashboard() {
+      try {
+        show("Carregando Informacõe...s")
+        
+        const user= await getProfile()
+        
         if (!user.store) {
-          throw new Error("Usuário não possui loja");
-        }
-        GethistoricalStore().then(setHistorical)
-        setStore(user.store);
-      })
-      .catch((err) => {
-        console.error(err);
+            throw new Error("Usuário não possui loja");
+          }
+          setStore(user.store);
+
+          const history = await GethistoricalStore()
+          setHistorical(history)
+                
+      } catch (error) {
+        console.error(error);
         setStore(null);
-      })
-      .finally(() => setLoading(false));
+      }finally{hide()}
+    }
+    LoadinaDashboard()
   }, []);
 
-  if (loading) return <p className="p-5 text-gray-800 dark:text-white">Carregando...</p>;
   if (!store) return <p className="p-5 text-gray-800 dark:text-white">Você ainda não possui uma loja</p>;
 
   return (

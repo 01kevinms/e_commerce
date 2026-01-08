@@ -22,33 +22,43 @@ import CreateStore from "./components/store/CreateStore"
 function App() {
   
   return (
-     <HashRouter>
-    <Routes>
-       {/* PÚBLICAS */}
-        <Route path="/signin" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
+    <HashRouter>
+  <Routes>
 
-        {/* PROTEGIDAS */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<MenuDashBoard />}>
-            <Route index element={<Dashboard />} />
-            <Route path="cart" element={<CartUser />} />
-            <Route path="favoritos" element={<Favoritos />}/>
-            <Route path="product/:id" element={<ItemSelect />} />
-            <Route path="settings" element={<Settings />}/>
-            <Route path="profile" element={<Profile/>} />
-            <Route path="user" element={<UserMain/>} />
-            <Route path="search" element={<SearchPage />} />
-            <Route path="store/dashboard" element={<DashboardStore />} />
-            <Route path="user/store" element={<CreateStore />} />
-            <Route path="checkout" element={<Checkout/>} />
-            <Route path="Order/:id" element={<Orders/>} />
-            <Route path="Orders" element={<ListOrders/>} />
-          </Route>
-        </Route>
+    {/* AUTH */}
+    <Route path="/signin" element={<Login />} />
+    <Route path="/signup" element={<Register />} />
 
-      </Routes>
-  </HashRouter>     
+    {/* PÚBLICAS (VISITANTES) */}
+    <Route element={<MenuDashBoard />}>
+      <Route index element={<Dashboard />} />
+      <Route path="product/:id" element={<ItemSelect />} />
+      <Route path="search" element={<SearchPage />} />
+    </Route>
+    <Route element={<ProtectedRoute />}>
+      <Route element={<MenuDashBoard />}>
+
+        <Route path="cart" element={<CartUser />} />
+        <Route path="favoritos" element={<Favoritos />} />
+        <Route path="checkout" element={<Checkout />} />
+
+        <Route path="settings" element={<Settings />} />
+        <Route path="profile" element={<Profile />} />
+
+        <Route path="user" element={<UserMain />} />
+        <Route path="orders" element={<ListOrders />} />
+        <Route path="order/:id" element={<Orders />} />
+
+        {/* LOJA */}
+        <Route path="store/dashboard" element={<DashboardStore />} />
+        <Route path="user/store" element={<CreateStore />} />
+
+      </Route>
+    </Route>
+
+  </Routes>
+</HashRouter>
+   
   )
 }
 
